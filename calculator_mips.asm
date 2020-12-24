@@ -27,6 +27,9 @@ Dividend:     .asciiz "\nPlease Enter the Dividend: "
 Divisor:      .asciiz "\nPlease Enter the Divisor: "
 Result:       .asciiz "\nThe Result of the Division is: "
 Remainder:    .asciiz "\nthe Remainderis: "
+MinMsg1: .asciiz"Enter the array elemnts: "
+MinMsg2: .asciiz"Enter the array size: "
+array: .word 80
 #$s0 contains number 1
 #$sl contains number 2
 #$s2 contains number 
@@ -135,13 +138,51 @@ j exit
 #Case 2 Will  execute this part
 #Mostafa Section Minmuim of list
 min: 
-#Enter size of array numbers 
+
+#Enter the size of the array
+li $v0,4
+la $a0,MinMsg2
+syscall
+li $v0, 5
+syscall
+move $t3, $v0
+addi $t2, $zero,4
+mul $t3, $t3, $t2
 
 #Enter numbers of array
+li $v0,4
+la $a0,MinMsg1
+syscall
 
+addi $t0, $zero,0
+while:
+	beq $t0,$t3,while1 
+	li $v0,5
+	syscall
+	move $s0,$v0
+	sw $s0, array($t0)
+	addi $t0,$t0,4
 
+	j while
 #start to find minmuim
-######## remove this and start Your fuckn work#####
+addi $t0, $zero,0
+lw $t4,array($t0)
+while1:
+	beq $t0,$t3,printresult 
+	lw $t6,array($t0)
+	slt $s0,$t4,$t6
+	beq $s0,$zero,assignMin
+	j while1
+	
+	
+assignMin:
+move $t4, $t6
+j while1
+printresult:
+li $v0,1
+move $a0,$t4
+syscall
+
 li $v0,4
 la $a0, ch2
 syscall
