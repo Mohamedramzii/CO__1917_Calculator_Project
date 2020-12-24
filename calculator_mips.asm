@@ -179,48 +179,38 @@ j exit
 # ; section
 divv:
 #Enter Two numbers
-    li $v0, 4
-    la $a0, Dividend
-     syscall
-     li $v0, 5
-     syscall
-
+    li $v0, 4   #command for printing a string
+    la $a0, Dividend #loading the string into Dividend enable printing
+    syscall      #executing the command
+     li $v0, 5       #command for reading an integer
+     syscall    #executing the command
      add $t0, $v0, $zero
 
-     li $v0, 4
-     la $a0, Divisor
-     syscall
-     li $v0, 5
-     syscall
-
+     li $v0, 4   #command for printing a string
+     la $a0, Divisor #loading the string into Divisor enable printing
+     syscall          #executing the command
+     li $v0, 5 #command for reading an integer
+     syscall  #executing the command
      add $t1, $v0, $zero
+         mul $t6,$t0,$t1 #this adds the values stored in $t0 and $t1 and assigns them to the temporary register $t6
 
-     div $t0, $t1
-
-     li $v0, 4
-
-     la $a0, Result
-
+#start division
+     div $t0, $t1 #this adds the values stored in $t1 and assigns them to the temporary register $t1
+     li $v0, 4  #this is the command for printing a string
+     la $a0, Result #loading the string into Result enable printing
      syscall
 
-     li $v0, 1
-
+     li $v0, 1 
      mflo $a0
-
      syscall
 
-     li $v0, 4
-
-     la $a0, Remainder
-
+     li $v0, 4 #this is the command for printing a string
+     la $a0, Remainder #loading the string into Remainder enable printing
      syscall
-
+     
      li $v0, 1
-
      mfhi $a0
-
      syscall
-###### END Date 26/12 ######
 j exit
 
 ##### medhat section Sin , cos , tan #####
