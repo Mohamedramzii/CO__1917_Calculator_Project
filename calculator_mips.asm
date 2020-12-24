@@ -23,7 +23,10 @@ an7: .asciiz "\nTan is \n"
 an8: .asciiz "\n Square detection is \n"
 an9: .asciiz "\n Rectangle detection is   \n"
 an10: .asciiz "\n Triangle detection is \n"
-
+Dividend:     .asciiz "\nPlease Enter the Dividend: "
+Divisor:      .asciiz "\nPlease Enter the Divisor: "
+Result:       .asciiz "\nThe Result of the Division is: "
+Remainder:    .asciiz "\nthe Remainderis: "
 #$s0 contains number 1
 #$sl contains number 2
 #$s2 contains number 
@@ -176,27 +179,47 @@ j exit
 # ; section
 divv:
 #Enter Two numbers
-li $v0,4
-la $a0, st1
-syscall
-li $v0,5
-syscall
-addi $s0,$v0,0
-li $v0,5
-syscall
-addi $s1,$v0,0
-li $v0,4
+    li $v0, 4
+    la $a0, Dividend
+     syscall
+     li $v0, 5
+     syscall
 
-#######
-syscall
-li $v0,4
-la $a0,an4
-syscall
-#start to find minmuim
-######## remove this and start Your fuckn work#####
-li $v0,4
-la $a0, ch4
-syscall
+     add $t0, $v0, $zero
+
+     li $v0, 4
+     la $a0, Divisor
+     syscall
+     li $v0, 5
+     syscall
+
+     add $t1, $v0, $zero
+
+     div $t0, $t1
+
+     li $v0, 4
+
+     la $a0, Result
+
+     syscall
+
+     li $v0, 1
+
+     mflo $a0
+
+     syscall
+
+     li $v0, 4
+
+     la $a0, Remainder
+
+     syscall
+
+     li $v0, 1
+
+     mfhi $a0
+
+     syscall
 ###### END Date 26/12 ######
 j exit
 
