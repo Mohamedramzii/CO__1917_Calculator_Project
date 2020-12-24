@@ -13,7 +13,7 @@ int main()
   printf("\nOperation 2: Multiplication");
   printf("\nOperation 3: Division");
   printf("\nOperation 4: Minimum Number");
-  printf("\n\nChoose your Operation \n");
+  printf("\n\n\t\t\t\t\tCHOOSE YOUR OPERATION \n");
   scanf("%d",&op);
 
 
