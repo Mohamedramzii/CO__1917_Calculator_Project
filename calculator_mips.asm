@@ -193,27 +193,25 @@ j exit
 # ; section multiplication
 mull:
 #Enter Two numbers
-li $v0,4
-la $a0, st1
-syscall
-li $v0,5
-syscall
-addi $s0,$v0,0
-li $v0,5
-syscall
-addi $s1,$v0,0
-li $v0,4
-syscall
-#########
-li $v0,4
-la $a0,an3
-syscall
-mult $s0,$s1
-li $v0,1
-mfhi $a0
-syscall
-mflo $a0
-syscall
+     li $v0, 4  #command for printing a string
+     la $a0, st1  #loading the string into st1 enable printing
+     syscall
+     li $v0, 5 #command for reading an integer
+     syscall
+     add $t0, $v0, $zero
+     li $v0, 5 #command for reading an integer
+     syscall
+     add $t1, $v0, $zero 
+     mult $t0, $t1  #this adds the values stored in t1 and assigns them to the temporary register $t0
+     li $v0, 4 #command for printing a string
+     la $a0, Result  #loading the string into Result enable printing
+     syscall
+     li $v0, 1
+     mfhi $a0 # Move From High  register
+     syscall
+     li $v0, 1
+     mflo $a0  # Move From Low register
+     syscall
 j exit
 
 #Case 4 Will  execute this part
@@ -233,16 +231,16 @@ divv:
      li $v0, 5 #command for reading an integer
      syscall  #executing the command
      add $t1, $v0, $zero
-         mul $t6,$t0,$t1 #this adds the values stored in $t0 and $t1 and assigns them to the temporary register $t6
+     mul $t6,$t0,$t1 #this adds the values stored in $t0 and $t1 and assigns them to the temporary register $t6
 
 #start division
-     div $t0, $t1 #this adds the values stored in $t1 and assigns them to the temporary register $t1
+     div $t0, $t1 #this adds the values stored in $t1 and assigns them to the temporary register $t0
      li $v0, 4  #this is the command for printing a string
      la $a0, Result #loading the string into Result enable printing
      syscall
 
      li $v0, 1 
-     mflo $a0
+     mflo $a0  # Move From Low register
      syscall
 
      li $v0, 4 #this is the command for printing a string
@@ -250,7 +248,7 @@ divv:
      syscall
      
      li $v0, 1
-     mfhi $a0
+     mfhi $a0  # Move From High register
      syscall
 j exit
 
