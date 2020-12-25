@@ -17,7 +17,10 @@ an1: .asciiz "\nAddition is \n"
 an2: .asciiz "\nmin of list is \n"
 an3: .asciiz "\nMultiple is \n"
 an4: .asciiz "\ndivision is \n"
-an5: .asciiz "\nSin is \n"
+degree: .asciiz "\enter the degree \n"
+Opposite:.asciiz "\enter the opposite to the angle ?\n"
+Adjacent:.asciiz "\enter  the adjacent (next to) to the angle ?\n"
+Hypotenuse:.asciiz "\enter  the adjacent (next to) to the angle ?\n"
 an6: .asciiz "\nCos is \n"
 an7: .asciiz "\nTan is \n"
 an8: .asciiz "\n Square detection is \n"
@@ -25,11 +28,9 @@ an9: .asciiz "\n Rectangle detection is   \n"
 an10: .asciiz "\n Triangle detection is \n"
 Dividend:     .asciiz "\nPlease Enter the Dividend: "
 Divisor:      .asciiz "\nPlease Enter the Divisor: "
-Result:       .asciiz "\nThe Result of the Division is: "
+Result:       .asciiz "\nThe Result is: "
 Remainder:    .asciiz "\nthe Remainderis: "
-MinMsg1: .asciiz"Enter the array elemnts: "
-MinMsg2: .asciiz"Enter the array size: "
-array: .word 80
+ReadasAfloat:   .float 0.0
 #$s0 contains number 1
 #$sl contains number 2
 #$s2 contains number 
@@ -37,6 +38,7 @@ array: .word 80
 
 .text
 .globl main
+
 main:
 
 li $v0,4
@@ -138,51 +140,13 @@ j exit
 #Case 2 Will  execute this part
 #Mostafa Section Minmuim of list
 min: 
-
-#Enter the size of the array
-li $v0,4
-la $a0,MinMsg2
-syscall
-li $v0, 5
-syscall
-move $t3, $v0
-addi $t2, $zero,4
-mul $t3, $t3, $t2
+#Enter size of array numbers 
 
 #Enter numbers of array
-li $v0,4
-la $a0,MinMsg1
-syscall
 
-addi $t0, $zero,0
-while:
-	beq $t0,$t3,while1 
-	li $v0,5
-	syscall
-	move $s0,$v0
-	sw $s0, array($t0)
-	addi $t0,$t0,4
 
-	j while
 #start to find minmuim
-addi $t0, $zero,0
-lw $t4,array($t0)
-while1:
-	beq $t0,$t3,printresult 
-	lw $t6,array($t0)
-	slt $s0,$t4,$t6
-	beq $s0,$zero,assignMin
-	j while1
-	
-	
-assignMin:
-move $t4, $t6
-j while1
-printresult:
-li $v0,1
-move $a0,$t4
-syscall
-
+######## remove this and start Your fuckn work#####
 li $v0,4
 la $a0, ch2
 syscall
@@ -254,52 +218,122 @@ j exit
 
 ##### medhat section Sin , cos , tan #####
 sin:
+lwc1 $f4,ReadasAfloat
+li $v0, 4   #command for printing a string
+    la $a0, degree #loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 5       #command for reading an integer
+     syscall    #executing the command
 
-#Enter three numbers
+
+    li $v0, 4   #command for printing a string
+    la $a0, Opposite #loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 6      #command for reading an integer
+     syscall    #executing the command
+     add.s $f5, $f0, $f4
+     
+    li $v0, 4   #command for printing a string
+    la $a0, Hypotenuse #loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 6      #command for reading an integer
+     syscall    #executing the command
+     add.s $f6, $f0, $f4
+     
 
 
-##########
-li $v0,4
-la $a0,an5
-syscall
-#start to find sin
-######## remove this and start Your fuckn work#####
-li $v0,4
-la $a0, ch5
-syscall
-###### END Date 26/12 ######
+#start sin
+     div.s $f12,$f5, $f6  #this adds the values stored in $t1 and assigns them to the temporary register $t0
+
+            la $a0, Result
+
+            li $v0, 4
+
+            syscall                          # Print Output String
+
+            li $v0, 2
+
+            syscall                          # Print result contained in $f12
 j exit
 
 ###### cos
 cos:
-#Enter Three numbers
+lwc1 $f4,ReadasAfloat
+li $v0, 4   #command for printing a string
+    la $a0, degree #loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 5       #command for reading an integer
+     syscall    #executing the command
 
-########
-li $v0,4
-la $a0,an6
-syscall
-#start to find cos
-######## remove this and start Your fuckn work#####
-li $v0,4
-la $a0, ch6
-syscall
-###### END Date 26/12 ######
+
+    li $v0, 4   #command for printing a string
+    la $a0, Adjacent #loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 6      #command for reading an integer
+     syscall    #executing the command
+     add.s $f5, $f0, $f4
+     
+    li $v0, 4   #command for printing a string
+    la $a0, Hypotenuse #loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 6      #command for reading an integer
+     syscall    #executing the command
+     add.s $f6, $f0, $f4
+     
+
+
+#start cos
+     div.s $f12,$f5, $f6  #this adds the values stored in $t1 and assigns them to the temporary register $t0
+
+            la $a0, Result
+
+            li $v0, 4
+
+            syscall                          # Print Output String
+
+            li $v0, 2
+
+            syscall                          # Print result contained in $f12
 j exit
 
 ##### TAN
 tan:
-#Enter Three numbers
+lwc1 $f4,ReadasAfloat
+li $v0, 4   #command for printing a string
+    la $a0, degree #loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 5       #command for reading an integer
+     syscall    #executing the command
 
-#####
-li $v0,4
-la $a0,an7
-syscall
-#start to find tan
-######## remove this and start Your fuckn work#####
-li $v0,4
-la $a0, ch7
-syscall
-###### END Date 26/12 ######
+
+    li $v0, 4   #command for printing a string
+    la $a0,  Opposite#loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 6      #command for reading an integer
+     syscall    #executing the command
+     add.s $f5, $f0, $f4
+     
+    li $v0, 4   #command for printing a string
+    la $a0, Adjacent #loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 6      #command for reading an integer
+     syscall    #executing the command
+     add.s $f6, $f0, $f4
+     
+
+
+#start tan
+     div.s $f12,$f5, $f6  #this adds the values stored in $t1 and assigns them to the temporary register $t0
+
+            la $a0, Result
+
+            li $v0, 4
+
+            syscall                          # Print Output String
+
+            li $v0, 2
+
+            syscall                          # Print result contained in $f12
 j exit
 
 #### maher section 
