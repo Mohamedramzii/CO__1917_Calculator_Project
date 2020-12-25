@@ -159,6 +159,9 @@ la $a0,MinMsg1
 syscall
 
 addi $t0, $zero,0
+addi $t5, $zero,0
+addi $s4, $zero, 0
+lw $s4,array($t5)
 while:
 	beq $t0,$t3,while1 
 	li $v0,5
@@ -169,8 +172,7 @@ while:
 
 	j while
 #start to find minmuim
-addi $t5, $zero,0
-lw $s4,array($t0)
+
 while1:
 	beq $t5,$t3,printresult 
 	lw $s6, array($t5)
@@ -188,7 +190,7 @@ li $v0,4
 la $a0, ch2
 syscall
 li $v0,1
-move $a0,$t4
+add $a0, $zero, $s4
 syscall
 
 
@@ -282,10 +284,10 @@ li $v0, 4   #command for printing a string
      syscall    #executing the command
      add.s $f6, $f0, $f4
      
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
+
+
+
 
 
 #start sin
@@ -506,11 +508,6 @@ syscall
 addi $s6,$v0,0
 li $v0,4
 syscall
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
 
 ####Triangle detection
 
