@@ -27,8 +27,8 @@ Divisor:      .asciiz "\nPlease Enter the Divisor: "
 Result:       .asciiz "\nThe Result is: "
 Remainder:    .asciiz "\nthe Remainderis: "
 ReadasAfloat:   .float 0.0
-MinMsg1: .asciiz"Enter the array elemnts: "
-MinMsg2: .asciiz"Enter the array size: "
+MinMsg2: .asciiz"Enter the array elemnts: "
+MinMsg1: .asciiz"Enter the array size: "
 array: .word 80
 #$s0 contains number 1
 #$sl contains number 2
@@ -143,52 +143,53 @@ min:
 
 #Enter the size of the array
 li $v0,4
-la $a0,MinMsg2
+la $a0,MinMsg1		#printing Msg1
 syscall
 li $v0, 5
 syscall
-move $t3, $v0
+move $t3, $v0		#t3 => the size of the array
 addi $t2, $zero,4
-mul $t3, $t3, $t2
+mul $t3, $t3, $t2	#t3 => multiplied by 4 because int value = 4 bytes
 
 #Enter numbers of array
 li $v0,4
-la $a0,MinMsg1
+la $a0,MinMsg2		#printing Msg2
 syscall
 
-addi $t0, $zero,0
-addi $t5, $zero,0
-addi $s4, $zero, 0
-lw $s4,array($t5)
-while:
+addi $t0, $zero,0	#t0 => First loop counter
+addi $t5, $zero,0	#t5 => Second loop counter
+addi $s4, $zero, 0	#s4 => the minimum variable
+lw $s4,array($t5)	#assining s4 = array[0]
+
+while:			#First while loop
 	beq $t0,$t3,while1 
-	li $v0,5
+	li $v0,5	#Tacking elements from user
 	syscall
 	move $s0,$v0
-	sw $s0, array($t0)
-	addi $t0,$t0,4
+	sw $s0, array($t0)	#assining elements to the array
+	addi $t0,$t0,4		#increasing the counter
 
 	j while
 #start to find minmuim
 
-while1:
+while1:			#Second while loop
 	beq $t5,$t3,printresult 
 	lw $s6, array($t5)
 	addi $t5, $t5,4
-	slt $s0,$s6,$s4
-	bne $s0,$zero,assignMin
+	slt $s0,$s6,$s4		#comparing elements of array with the minimum value
+	bne $s0,$zero,assignMin#if the value of the array element is less than the minimum then swap
 	j while1
 	
 	
 assignMin:
-move $s4, $s6
+move $s4, $s6		#swapping
 j while1
-printresult:
+printresult:		#Printing result
 li $v0,4
 la $a0, an2
 syscall
 li $v0,1
-add $a0, $zero, $s4
+add $a0, $zero, $s4 
 syscall
 
 
