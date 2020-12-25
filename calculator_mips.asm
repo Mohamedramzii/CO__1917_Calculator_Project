@@ -147,12 +147,52 @@ min:
 
 #Enter numbers of array
 
+<<<<<<< Updated upstream
 
 #start to find minmuim
 ######## remove this and start Your fuckn work#####
+=======
+<<<<<<< HEAD
+addi $t0, $zero,0
+while:
+	beq $t0,$t3,while1
+	li $v0,5
+	syscall
+	move $s0,$v0
+	sw $s0, array($t0)
+	addi $t0,$t0,4
+=======
+>>>>>>> d3029448c3cfcb203e8cff24c85789fdfa09f5e1
+
+#start to find minmuim
+<<<<<<< HEAD
+addi $t5, $zero,0
+lw $s4,array($t5)
+while1:
+	beq $t5,$t3,printresult 
+	lw $s6, array($t5)
+	addi $t5, $t5,4
+	slt $s0,$s6,$s4
+	bne $s0,$zero,assignMin
+	j while1
+	
+	
+assignMin:
+move $s4, $s6
+j while1
+printresult:
+=======
+######## remove this and start Your fuckn work#####
+>>>>>>> d3029448c3cfcb203e8cff24c85789fdfa09f5e1
+>>>>>>> Stashed changes
 li $v0,4
 la $a0, ch2
 syscall
+li $v0,1
+add $a0, $zero, $s4
+syscall
+
+
 ###### END Date 26/12 ######
 j exit
 
@@ -160,25 +200,27 @@ j exit
 # ; section multiplication
 mull:
 #Enter Two numbers
-     li $v0, 4  #command for printing a string
-     la $a0, st1  #loading the string into st1 enable printing
-     syscall
-     li $v0, 5 #command for reading an integer
-     syscall
-     add $t0, $v0, $zero
-     li $v0, 5 #command for reading an integer
-     syscall
-     add $t1, $v0, $zero 
-     mult $t0, $t1  #this adds the values stored in t1 and assigns them to the temporary register $t0
-     li $v0, 4 #command for printing a string
-     la $a0, Result  #loading the string into Result enable printing
-     syscall
-     li $v0, 1
-     mfhi $a0 # Move From High  register
-     syscall
-     li $v0, 1
-     mflo $a0  # Move From Low register
-     syscall
+li $v0,4
+la $a0, st1
+syscall
+li $v0,5
+syscall
+addi $s0,$v0,0
+li $v0,5
+syscall
+addi $s1,$v0,0
+li $v0,4
+syscall
+#########
+li $v0,4
+la $a0,an3
+syscall
+mult $s0,$s1
+li $v0,1
+mfhi $a0
+syscall
+mflo $a0
+syscall
 j exit
 
 #Case 4 Will  execute this part
@@ -198,16 +240,16 @@ divv:
      li $v0, 5 #command for reading an integer
      syscall  #executing the command
      add $t1, $v0, $zero
-     mul $t6,$t0,$t1 #this adds the values stored in $t0 and $t1 and assigns them to the temporary register $t6
+         mul $t6,$t0,$t1 #this adds the values stored in $t0 and $t1 and assigns them to the temporary register $t6
 
 #start division
-     div $t0, $t1 #this adds the values stored in $t1 and assigns them to the temporary register $t0
+     div $t0, $t1 #this adds the values stored in $t1 and assigns them to the temporary register $t1
      li $v0, 4  #this is the command for printing a string
      la $a0, Result #loading the string into Result enable printing
      syscall
 
      li $v0, 1 
-     mflo $a0  # Move From Low register
+     mflo $a0
      syscall
 
      li $v0, 4 #this is the command for printing a string
@@ -215,7 +257,7 @@ divv:
      syscall
      
      li $v0, 1
-     mfhi $a0  # Move From High register
+     mfhi $a0
      syscall
 j exit
 
@@ -228,6 +270,24 @@ li $v0, 4   #command for printing a string
      li $v0, 5       #command for reading an integer
      syscall    #executing the command
 
+<<<<<<< Updated upstream
+
+    li $v0, 4   #command for printing a string
+    la $a0, Opposite #loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 6      #command for reading an integer
+     syscall    #executing the command
+     add.s $f5, $f0, $f4
+     
+    li $v0, 4   #command for printing a string
+    la $a0, Hypotenuse #loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 6      #command for reading an integer
+     syscall    #executing the command
+     add.s $f6, $f0, $f4
+     
+=======
+>>>>>>> Stashed changes
 
     li $v0, 4   #command for printing a string
     la $a0, Opposite #loading the string into degree enable printing
@@ -244,7 +304,10 @@ li $v0, 4   #command for printing a string
      add.s $f6, $f0, $f4
      
 
+<<<<<<< Updated upstream
+=======
 
+>>>>>>> Stashed changes
 #start sin
      div.s $f12,$f5, $f6  #this adds the values stored in $t1 and assigns them to the temporary register $t0
 
@@ -459,9 +522,15 @@ syscall
 addi $s6,$v0,0
 li $v0,4
 syscall
+<<<<<<< Updated upstream
 
 
 
+=======
+
+
+
+>>>>>>> Stashed changes
 ####Triangle detection
 
 
