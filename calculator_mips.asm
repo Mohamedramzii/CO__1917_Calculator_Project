@@ -337,158 +337,163 @@ j exit
 square:
 
 #Enter  numbers
-li $v0,4
-la $a0, st2
-syscall
-li $v0,5
-syscall
-addi $s4,$v0,0
-li $v0,5
-syscall
-addi $s5,$v0,0
-li $v0,5
-syscall
-addi $s6,$v0,0
-li $v0,5
-syscall
-addi $s7,$v0,0
-li $v0,4
-syscall
+li $v0,4 #Command for printing a string
+la $a0, st2 #command for loading string into degree to enable printing
+syscall #executes command
+li $v0,5  #command for reading an integer
+syscall   #executes command
+addi $s4,$v0,0 #assigns the integer to the specified register
+li $v0,5  #command for reading an integer
+syscall    # executes command
+addi $s5,$v0,0 #assigns integer to the specified register
+li $v0,5 #command for reading an integer
+syscall  # executes command
+addi $s6,$v0,0 #assigns integer to the specified register
+li $v0,5 #command for reading an integer
+syscall #executes command
+addi $s7,$v0,0 #assigns integer to the specified register
+li $v0,4 #Ends input and goes to next step
+
 ########
 
 #start to find square
-beq  $s4,$s5,Sq1
-li $t4,0
-j ExitSq
-Sq1:
-beq $s6,$s7,Sq2
-li $t4,0
-j ExitSq
-Sq2:
-beq $s4,$s6,Sq3
-li $t4,0
-j ExitSq
-Sq3:
-li $t4,1
-ExitSq:
+#each of 4 sides entered are assigned to 4 registers and then it begins comparing the values to see if it's a square or not
+
+beq  $s4,$s5,Sq1 #Compares if both registers contains same value Jump to Sq1
+li $t4,0   #assigns specified regisiter to 0 and thus not a square 
+j ExitSq # jumps to ExitSq and exits 
+Sq1:  #if both registers are equal program jumps here
+beq $s6,$s7,Sq2  #compares if both regisiters contains the same value Jump to Sq2
+li $t4,0   #assigns specified register to 0 and thus not a square 
+j ExitSq   #Jumps to ExitSq and exits   
+Sq2: #If both registers are equal jump to Sq2 for final check
+beq $s4,$s6,Sq3 #checks if both registers are equal one from each of the beq operations done above , if equal jump to Sq3
+li $t4,0 #assigns specified register to 0 and thus not a square
+j ExitSq #jumps to ExitsSq and exits
+Sq3: #Jumps here if all sides are equal and thus is a square 
+li $t4,1 #assigns specified register to 1 and thus is a square 
+ExitSq: #ends calculating if its a square or not
 #####
-li $v0,4
-la $a0, an8
-syscall
-add $a0, $t4, $0
-li $v0, 1
-syscall
-j exit
+li $v0,4  #Command for printing a string
+la $a0, an8  #command for loading string into degree to enable printing
+syscall          # executes command 
+add $a0, $t4, $0 #adds the value if its 1 or 0 to the specified register
+li $v0, 1 #prints the output given if its 0 or 1
+syscall #executs command
+j exit  #exits program
 
 #####rectangle
-rectangle:
+rectangle: 
 
 #Enter numbers
 
 
-li $v0,4
-la $a0, st2
-syscall
-li $v0,5
-syscall
-addi $s4,$v0,0
-li $v0,5
-syscall
-addi $s5,$v0,0
-li $v0,5
-syscall
-addi $s6,$v0,0
-li $v0,5
-syscall
-addi $s7,$v0,0
-li $v0,4
-syscall
+li $v0,4    #command for printing a string 
+la $a0, st2  #command for loading string to a degree to enable printing
+syscall #executes command 
+li $v0,5 # command for reading an integer
+syscall  #executes command
+addi $s4,$v0,0 #assigns the integer to a specified register
+li $v0,5   #commands for reading an integer
+syscall  #executes command
+addi $s5,$v0,0 #assigns the integer to a specified register
+li $v0,5   #commmand for reading an integer
+syscall  #executes command 
+addi $s6,$v0,0 #assigns the integer to a specified register
+li $v0,5  #command for reading an integer 
+syscall  #executes command
+addi $s7,$v0,0 #assigns the integer to a specified register
+li $v0,4  #ends input and goes to the next step
+
 ### rect detection
-beq  $s4,$s5,Rect1
-beq $s4,$s6,Rect2
-beq $s4,$s7,Rect3
-Rect1:
-beq  $s6,$s7,Rect11
-li $t4,0
-j ExitRect
-Rect11:
-li $t4,1
-j ExitRect
-Rect2:
-beq $s5,$s7,Rect22
-li $t4,0
-j ExitRect
-Rect22:
-li $t4,1
-j ExitRect
-Rect3:
-beq $s5,$s6,Rect33
-li $t4,0
-j ExitRect
-Rect33:
-li $t4,1
-ExitRect:
+
+beq $s4,$s5,Rect1 #compares if both registers are equal jump to Rect1
+beq $s4,$s6,Rect2 #compares if both registers are equal jump to Rect2
+beq $s4,$s7,Rect3 #compares if both registers are equal jump to Rect3
+li $t4,0  #comes here if none of the registers above are equal and assigns specified register to 0 thus not a rectangle
+j ExitRect #jumps to ExitRect and exits
+Rect1: #jumps here if the first registers are equal 
+beq  $s6,$s7,Rect11 #compares if both registers are equal jump to React11
+li $t4,0 #assigns specified register to 0 and thus not a rectangle
+j ExitRect #jumps to ExitRect and exits 
+Rect11: #comes here if both registers are equal 
+li $t4,1 #assigns specified register to 1 and thus is a rectangle 
+j ExitRect #jumps to ExitRect and exits 
+Rect2:  #comes here if the second registers are equal
+beq $s5,$s7,Rect22 #compares if both registers are equal jump to Rect22
+li $t4,0 #assigns specified register to 0 and thus not a rectangle
+j ExitRect #jumps to ExitRect and exits 
+Rect22: #if both registers are equal
+li $t4,1 #assigns specified register to 1 and thus is a rectangle
+j ExitRect #jumps to ExitRect and exits
+Rect3: #jumps here if third registers are equal
+beq $s5,$s6,Rect33 #compares if both registers are equal jump to Rect33
+li $t4,0 #assigns specified register to 0 and thus not a rectangle
+j ExitRect #jumps to Exit Rectand exits
+Rect33: #comes here if both registers are equal
+li $t4,1 #assigns specified register to 1 and thus is a rectangle
+ExitRect: #end of detection 
 ########
 
-li $v0,4
-la $a0, an9
-syscall
-add $a0, $t4, $0
-li $v0, 1
-syscall
-j exit
+li $v0,4 #command for printing a string
+la $a0, an9 #command for loading string into degree to enable printing
+syscall #executes command
+add $a0, $t4, $0 #adds the value to the specified register if its 1 or 0
+li $v0, 1 #prints the output of the detection 1 or 0 
+syscall #executes command
+j exit #exits
 
 #####triangle
 triangle:
 #Enter three numbers
-li $v0,4
-la $a0, st3
-syscall
-li $v0,5
-syscall
-addi $s4,$v0,0
-li $v0,5
-syscall
-addi $s5,$v0,0
-li $v0,5
-syscall
-addi $s6,$v0,0
-li $v0,4
-syscall
+li $v0,4 #command for printing a string
+la $a0, st3 #command for loading string into degree to enable printing
+syscall #executes command
+li $v0,5 #command for reading integer
+syscall #executes command
+addi $s4,$v0,0 #assigns integer to the specified register
+li $v0,5  #command for reading an integer
+syscall #executes command
+addi $s5,$v0,0 #assigns integer to the specified register
+li $v0,5  #command for reading an integer
+syscall   #executes command
+addi $s6,$v0,0 #assigns integer to the specified register
+li $v0,4 #Ends input and goes next step
+
 
 ####Triangle detection
 
 
-add $t4, $s4,$s5
-add $t5, $s4 ,$s6 
-add $t6,$s5,$s6 
+add $t4, $s4,$s5  #adds first and second length into a spefcified register
+add $t5, $s4 ,$s6 #adds first and third length into a specified register
+add $t6,$s5,$s6  #adds second and third length into a specified register
 
-sleu  $t7, $t4,$s6 
-beqz $t7,Tri1
-li $s7,0
-j ExitTri
-Tri1:
-sleu  $t8, $t5,$s5
-beqz $t8,Tri2
-li $s7,0
-j ExitTri
-Tri2:
-sleu $t9, $t6,$s4
-beqz $t9,Tri3
-li $s7, 0
-j ExitTri
-Tri3:
-li $s7,1
-ExitTri: 
+sleu  $t7, $t4,$s6 #compares the 2nd and 3rd register if the 2nd is less than or equal assigns the first register by 1 if not assign it by 0
+beqz $t7,Tri1 #compares specified register if its equal to 0 jump to Tri1
+li $s7,0 #assigns specified register to 0 thus not triangle
+j ExitTri #jumps to ExitTri and exits
+Tri1: #jumps here if the specified register was equal 0
+sleu  $t8, $t5,$s5 #compares the 2nd and 3rd register if the 2nd is less than or equal assigns the first register by 1 if not assign it by 0
+beqz $t8,Tri2 #compares specified register if its equal to 0 jump to Tri2
+li $s7,0 #assigns specified register to 0 thus not triangle
+j ExitTri #jumps to ExitTri and exits 
+Tri2: #comes here if the specified register was equal 0
+sleu $t9, $t6,$s4 #compares the 2nd and 3rd register if the 2nd is less than or equal assigns the first register by 1 if not assign it by 0
+beqz $t9,Tri3 #compares specified register if its equal to 0 jump to Tri3
+li $s7, 0 #assigns specified register to 0 thus not triangle 
+j ExitTri #jumps to ExitTri and exits
+Tri3: #comes here if specified register is equal to 0
+li $s7,1 #assigns specified register to 1 and thus is a triangle
+ExitTri: #end of detection  
 ######
-li $v0,4
-la $a0,an10
-syscall
+li $v0,4 #command for printing a string
+la $a0,an10 #command for loading string into degree to enable printing
+syscall #executes command
 
-add $a0, $s7, $0
-li $v0, 1
-syscall
-j exit
+add $a0, $s7, $0 #adds the value to the specified register if its 1 or 0
+li $v0, 1 #prints the output of the detection 1 or 0 
+syscall #executes command
+j exit  #exits
 
 
 #Default Will  execute this part
