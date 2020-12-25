@@ -13,6 +13,8 @@ ch8: .asciiz "8-Square detection  \n"
 ch9: .asciiz "9-Reactangle detection  \n"
 ch10: .asciiz "10-Triangle detection  \n"
 st1: .asciiz "Enter 2 numbers \n"
+st2: .asciiz "Enter 4 length of each side \n"
+st3: .asciiz "Enter 3 length of each side \n"
 an1: .asciiz "\nAddition is \n"
 an2: .asciiz "\nmin of list is \n"
 an3: .asciiz "\nMultiple is \n"
@@ -21,11 +23,12 @@ degree: .asciiz "\enter the degree \n"
 Opposite:.asciiz "\enter the opposite to the angle ?\n"
 Adjacent:.asciiz "\enter  the adjacent (next to) to the angle ?\n"
 Hypotenuse:.asciiz "\enter  the adjacent (next to) to the angle ?\n"
-an6: .asciiz "\nCos is \n"
-an7: .asciiz "\nTan is \n"
-an8: .asciiz "\n Square detection is \n"
-an9: .asciiz "\n Rectangle detection is   \n"
-an10: .asciiz "\n Triangle detection is \n"
+an5: .asciiz "\nSin is: \t"
+an6: .asciiz "\nCos is: \t"
+an7: .asciiz "\nTan is: \t"
+an8: .asciiz "\n Square detection is: \t"
+an9: .asciiz "\n Rectangle detection is: \t"
+an10: .asciiz "\n Triangle detection is: \t"
 Dividend:     .asciiz "\nPlease Enter the Dividend: "
 Divisor:      .asciiz "\nPlease Enter the Divisor: "
 Result:       .asciiz "\nThe Result is: "
@@ -343,7 +346,7 @@ square:
 #Enter  numbers
 
 li $v0,4
-la $a0, st1
+la $a0, st2
 syscall
 li $v0,5
 syscall
@@ -360,7 +363,6 @@ addi $s7,$v0,0
 li $v0,4
 syscall
 ########
-
 #start to find square
 beq  $s4,$s5,Sq1
 li $t4,0
@@ -377,8 +379,8 @@ Sq3:
 li $t4,1
 ExitSq:
 #####
-li $v0,4
-la $a0, ch8
+li $v0, 4
+la $a0, an8
 syscall
 add $a0, $t4, $0
 li $v0, 1
@@ -389,10 +391,8 @@ j exit
 rectangle:
 
 #Enter numbers
-
-
 li $v0,4
-la $a0, st1
+la $a0, st2
 syscall
 li $v0,5
 syscall
@@ -434,9 +434,8 @@ Rect33:
 li $t4,1
 ExitRect:
 ########
-
-li $v0,4
-la $a0, ch9
+li $v0, 4
+la $a0, an9
 syscall
 add $a0, $t4, $0
 li $v0, 1
@@ -447,7 +446,7 @@ j exit
 triangle:
 #Enter three numbers
 li $v0,4
-la $a0, st1
+la $a0, st3
 syscall
 li $v0,5
 syscall
@@ -490,10 +489,6 @@ ExitTri:
 ######
 li $v0,4
 la $a0,an10
-syscall
-
-li $v0,4
-la $a0, ch10
 syscall
 add $a0, $s7, $0
 li $v0, 1

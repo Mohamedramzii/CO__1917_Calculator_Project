@@ -91,13 +91,13 @@ int main()
    case 7: //tan
        break;
       case 8://Triangle
-       printf("\nEnter First Side:  ");
+       printf("\n Enter 3 length of each side \n  ");
        scanf("%u",&L1);
 
-       printf("\nEnter Second Side:  ");
+
        scanf("%u",&L2);
 
-       printf("\nEnter Third Side:  ");
+
        scanf("%u",&L3);
        if (L1+L2<= L3 || L1+L3<= L2 || L2+L3<=L1){
         valid=0;
@@ -110,16 +110,15 @@ int main()
 
        break;
    case 9://Rectangle
-       printf("\nEnter First Side:  ");
+       printf("\nEnter 4 length of each side \n");
        scanf("%u",&L1);
 
-       printf("\nEnter Second Side:  ");
        scanf("%u",&L2);
 
-       printf("\nEnter Third Side:  ");
+
        scanf("%u",&L3);
 
-       printf("\nEnter Fourth Side:  ");
+
        scanf("%u",&L4);
        if ((L1 == L2 && L3 == L4) || (L1 == L3 && L2 == L4) || (L1 == L4 && L2 == L3)){
         valid=1;
@@ -129,16 +128,15 @@ int main()
         printf("%d",valid);
        break;
    case 10://Square
-        printf("\nEnter First Side:  ");
+        printf("\nEnter 4 length of each side \n ");
        scanf("%u",&L1);
 
-       printf("\nEnter Second Side:  ");
+
        scanf("%u",&L2);
 
-       printf("\nEnter Third Side:  ");
+
        scanf("%u",&L3);
 
-       printf("\nEnter Fourth Side:  ");
        scanf("%u",&L4);
        if (L1 == L2 && L3 == L4 && L1 == L3){
         valid=1;
