@@ -11,67 +11,45 @@ int main()
   int a[100],i,n,min;
 
   printf("\nOperation 1: Addition");
-  printf("\nOperation 2: Multiplication");
-  printf("\nOperation 3: Division");
-  printf("\nOperation 4: Minimum Number");
+  printf("\nOperation 2: Minimum Number");
+  printf("\nOperation 3: Multiplication");
+  printf("\nOperation 4: Division");
+  printf("\nOperation 5: Sin");
+  printf("\nOperation 6: Cos");
+  printf("\nOperation 7: Tan");
   printf("\nOperation 8: Triangle Detection");
   printf("\nOperation 9: Rectangle Detection");
   printf("\nOperation 10: Square Detection");
   printf("\n\n\t\t\t\t\tCHOOSE YOUR OPERATION \n");
-  scanf("%d",&op);
 
 
 
+do{
 
+        scanf("%d",&op);
 
   switch (op)
   {
 
    case 1: //Addition
-       printf("\nFirst Number:  ");
+       printf("\nEnter 2 Numbers:  ");
        scanf("%f",&num1);
-
-       printf("\nSecond Number:  ");
        scanf("%f",&num2);
 
 
       result= num1+num2;
-      printf("\n Addition = %f ",result);
+      printf("\n Addition = %f \n ",result);
+
       break;
 
-   case 2: //Multiplication
-       printf("\nFirst Number:  ");
-       scanf("%f",&num1);
-
-       printf("\nSecond Number:  ");
-       scanf("%f",&num2);
-
-
-       result=num1 * num2;
-       printf("\n Multiplication = %f ",result);
-       break;
-
-   case 3://Division
-       printf("\nFirst Number:  ");
-       scanf("%f",&num1);
-
-       printf("\nSecond Number:  ");
-       scanf("%f",&num2);
-
-
-       result=num1 / num2;
-       printf("\n Division = %f ",result);
-       break;
-
-   case 4://Minimum Number
+   case 2://Minimum Number
 
     printf("Enter size of the array : ");
     scanf("%d",&n);
 
-
+    printf("Enter elements in array : ");
     for(i=0; i<n; i++)
     {
-        printf("Enter element %d in array : ",i);
         scanf("%d",&a[i]);
     }
     min=a[0];
@@ -81,32 +59,71 @@ int main()
 		  min=a[i];
 
     }
-     printf("\nMinimum Number Of Your Array is : %d",min);
+     printf("\nMinOf Your list is : %d",min);
+
      break;
 
+
+   case 3: //Multiplication
+       printf("\nEnter 2 Numbers:  ");
+       scanf("%d",&num1);
+       scanf("%d",&num2);
+
+       result=num1 * num2;
+       printf("\n result = %f ",result);
+       break;
+
+   case 4://Division
+       printf("\nPlease Enter the Dividend: ");
+       scanf("%f",&num1);
+       printf("\nPlease Enter the Divisor:  ");
+       scanf("%f",&num2);
+       result=num1 / num2;
+       printf("\n result = %f ",result);
+
+       break;
+
    case 5: //Sin
+       printf("\n Enter the opposite to the angle:  ");
+       scanf("%f",&num1);
+       printf("\n Enter the hypotenuse of the angle:  ");
+       scanf("%f",&num2);
+       result=num1 / num2;
+       printf("\n result = %f ",result);
+
        break;
    case 6: //cos
+       printf("\n Enter the adjacent to the angle:  ");
+       scanf("%f",&num1);
+       printf("\n Enter the hypotenuse of the angle:  ");
+       scanf("%f",&num2);
+       result=num1 / num2;
+       printf("\n result = %f ",result);
+
        break;
+
    case 7: //tan
+       printf("\n Enter the opposite to the angle:  ");
+       scanf("%f",&num1);
+       printf("\n Enter the adjacent of the angle:  ");
+       scanf("%f",&num2);
+       result=num1 / num2;
+       printf("\n result = %f ",result);
+
        break;
-      case 8://Triangle
-       printf("\n Enter 3 length of each side \n  ");
+
+      case 8://Square
+        printf("\nEnter 4 length of each side \n ");
        scanf("%u",&L1);
-
-
        scanf("%u",&L2);
-
-
        scanf("%u",&L3);
-       if (L1+L2<= L3 || L1+L3<= L2 || L2+L3<=L1){
-        valid=0;
-       }
-
-       else{
+       scanf("%u",&L4);
+       if (L1 == L2 && L3 == L4 && L1 == L3){
         valid=1;
-       }
-       printf("%d",valid);
+        }else {
+        valid=0;
+        }
+        printf("\n Square detection is : %d",valid);
 
        break;
    case 9://Rectangle
@@ -125,35 +142,37 @@ int main()
         }else {
         valid=0;
         }
-        printf("%d",valid);
+        printf("\n Rectangle detection is :%d",valid);
+
        break;
-   case 10://Square
-        printf("\nEnter 4 length of each side \n ");
+   case 10:
+    //Triangle
+       printf("\n Enter 3 length of each side \n  ");
        scanf("%u",&L1);
-
-
        scanf("%u",&L2);
-
-
        scanf("%u",&L3);
-
-       scanf("%u",&L4);
-       if (L1 == L2 && L3 == L4 && L1 == L3){
-        valid=1;
-        }else {
+       if (L1+L2<= L3 || L1+L3<= L2 || L2+L3<=L1){
         valid=0;
-        }
-        printf("%d",valid);
+       }
+
+       else{
+        valid=1;
+       }
+       printf("\n Triangle detection is : %d",valid);
+
        break;
 
+   default:
+
+        printf("Wrong choice ,Please enter again:");
+        break;
 
 
-
-    default:
-        printf("\n********Choose another Operator*********");
-
-  }
+      }
+}while(op<1||op>10);
 
 
 
 }
+
+

@@ -1,5 +1,6 @@
 .data
 choice: .asciiz "Enter Choice for operation\n"
+choice1: .asciiz "Wrong choice ,Please enter again: \n"
 ch1: .asciiz "1-addition (+) \n"
 ch2: .asciiz "2-Min of list \n"
 ch3: .asciiz "3- multiplication (*)\n"
@@ -39,7 +40,7 @@ array: .word 80
 .globl main
 
 main:
-
+## Menu####
 li $v0,4
 la $a0, choice
 syscall
@@ -192,8 +193,6 @@ li $v0,1
 add $a0, $zero, $s4 
 syscall
 
-
-###### END Date 26/12 ######
 j exit
 
 ##Case 3 Will  execute this part
@@ -225,94 +224,62 @@ j exit
 # ; section
 divv:
 #Enter Two numbers
-    li $v0, 4   #command for printing a string
-    la $a0, Dividend #loading the string into Dividend enable printing
-    syscall      #executing the command
-     li $v0, 5       #command for reading an integer
-     syscall    #executing the command
-     add $t0, $v0, $zero
-
-     li $v0, 4   #command for printing a string
-     la $a0, Divisor #loading the string into Divisor enable printing
-     syscall          #executing the command
-     li $v0, 5 #command for reading an integer
-     syscall  #executing the command
-     add $t1, $v0, $zero
-     mul $t6,$t0,$t1 #this adds the values stored in $t0 and $t1 and assigns them to the temporary register $t6
-
-#start division
-     div $t0, $t1 #this adds the values stored in $t1 and assigns them to the temporary register $t0
-     li $v0, 4  #this is the command for printing a string
-     la $a0, Result #loading the string into Result enable printing
-     syscall
-
-     li $v0, 1 
-     mflo $a0  # Move From Low register
-     syscall
-
-     li $v0, 4 #this is the command for printing a string
-     la $a0, Remainder #loading the string into Remainder enable printing
-     syscall
-     
-     li $v0, 1
-     mfhi $a0  # Move From High register
-     syscall
-j exit
-
-##### medhat section Sin , cos , tan #####
-sin:
-lwc1 $f4,ReadasAfloat
+   lwc1 $f4,ReadasAfloat
 li $v0, 4   #command for printing a string
-    la $a0, degree #loading the string into degree enable printing
-    syscall      #executing the command
-     li $v0, 5       #command for reading an integer
-     syscall    #executing the command
-
-
+    
     li $v0, 4   #command for printing a string
-    la $a0, Opposite #loading the string into degree enable printing
+    la $a0, Dividend #loading the string Dividend into denable printing
     syscall      #executing the command
      li $v0, 6      #command for reading an integer
      syscall    #executing the command
      add.s $f5, $f0, $f4
      
     li $v0, 4   #command for printing a string
+    la $a0, Divisor #loading the string into Divisor enable printing
+    syscall      #executing the command
+     li $v0, 6      #command for reading an integer
+     syscall    #executing the command
+     add.s $f6, $f0, $f4
+
+#start division
+      div.s $f12,$f5, $f6  #this adds the values stored in $t1 and assigns them to the temporary register $t0
+            la $a0, Result
+            li $v0, 4
+            syscall                          # Print Output String
+            li $v0, 2
+            syscall                          # Print result contained in $f12
+j exit
+
+##### medhat section Sin , cos , tan #####
+sin:
+lwc1 $f4,ReadasAfloat
+    li $v0, 4   #command for printing a string
+    la $a0, Opposite #loading the string into degree enable printing
+    syscall      #executing the command
+     li $v0, 6      #command for reading an integer
+     syscall    #executing the command
+     add.s $f5, $f0, $f4
+    li $v0, 4   #command for printing a string
     la $a0, Hypotenuse #loading the string into degree enable printing
     syscall      #executing the command
      li $v0, 6      #command for reading an integer
      syscall    #executing the command
      add.s $f6, $f0, $f4
-     
-
-
-
-
-
 
 #start sin
      div.s $f12,$f5, $f6  #this adds the values stored in $t1 and assigns them to the temporary register $t0
-
             la $a0, Result
-
             li $v0, 4
-
             syscall                          # Print Output String
-
             li $v0, 2
-
-            syscall                          # Print result contained in $f12
+	    syscall                          # Print result contained in $f12
 j exit
 
 ###### cos
 cos:
 lwc1 $f4,ReadasAfloat
 li $v0, 4   #command for printing a string
-    la $a0, degree #loading the string into degree enable printing
-    syscall      #executing the command
-     li $v0, 5       #command for reading an integer
-     syscall    #executing the command
-
-
+    
     li $v0, 4   #command for printing a string
     la $a0, Adjacent #loading the string into degree enable printing
     syscall      #executing the command
@@ -327,32 +294,19 @@ li $v0, 4   #command for printing a string
      syscall    #executing the command
      add.s $f6, $f0, $f4
      
-
-
 #start cos
      div.s $f12,$f5, $f6  #this adds the values stored in $t1 and assigns them to the temporary register $t0
 
             la $a0, Result
-
             li $v0, 4
-
-            syscall                          # Print Output String
-
+            syscall  #Print Output String
             li $v0, 2
-
-            syscall                          # Print result contained in $f12
+            syscall  # Print result contained in $f12
 j exit
 
 ##### TAN
 tan:
 lwc1 $f4,ReadasAfloat
-li $v0, 4   #command for printing a string
-    la $a0, degree #loading the string into degree enable printing
-    syscall      #executing the command
-     li $v0, 5       #command for reading an integer
-     syscall    #executing the command
-
-
     li $v0, 4   #command for printing a string
     la $a0,  Opposite#loading the string into degree enable printing
     syscall      #executing the command
@@ -371,15 +325,10 @@ li $v0, 4   #command for printing a string
 
 #start tan
      div.s $f12,$f5, $f6  #this adds the values stored in $t1 and assigns them to the temporary register $t0
-
             la $a0, Result
-
             li $v0, 4
-
             syscall                          # Print Output String
-
             li $v0, 2
-
             syscall                          # Print result contained in $f12
 j exit
 
@@ -388,7 +337,6 @@ j exit
 square:
 
 #Enter  numbers
-
 li $v0,4
 la $a0, st2
 syscall
@@ -545,9 +493,9 @@ j exit
 
 #Default Will  execute this part
 alll:
-
+##menu#
 li $v0,4
-la $a0, choice
+la $a0, choice1
 syscall
 li $v0,4
 la $a0, ch1 
@@ -610,10 +558,10 @@ beq $t0,$t1,tan
 #CASE 8-->Square
 addi $t1,$zero,8
 beq $t0,$t1,square
-#CASE 7-->rectangle
+#CASE 9-->rectangle
 addi $t1,$zero,9
 beq $t0,$t1,rectangle
-#CASE 7-->triangle
+#CASE 10-->triangle
 addi $t1,$zero,10
 beq $t0,$t1,triangle
 #DEFAULT CASE
