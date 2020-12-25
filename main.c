@@ -5,7 +5,8 @@
 int main()
 {
   float num1,num2;
-  int op;
+  int op,valid;
+  unsigned int L1,L2,L3,L4;
   float result;
   int a[100],i,n,min;
 
@@ -13,6 +14,9 @@ int main()
   printf("\nOperation 2: Multiplication");
   printf("\nOperation 3: Division");
   printf("\nOperation 4: Minimum Number");
+  printf("\nOperation 8: Triangle Detection");
+  printf("\nOperation 9: Rectangle Detection");
+  printf("\nOperation 10: Square Detection");
   printf("\n\n\t\t\t\t\tCHOOSE YOUR OPERATION \n");
   scanf("%d",&op);
 
@@ -86,11 +90,62 @@ int main()
        break;
    case 7: //tan
        break;
-   case 8://Triangle
+      case 8://Triangle
+       printf("\nEnter First Side:  ");
+       scanf("%u",&L1);
+
+       printf("\nEnter Second Side:  ");
+       scanf("%u",&L2);
+
+       printf("\nEnter Third Side:  ");
+       scanf("%u",&L3);
+       if (L1+L2<= L3 || L1+L3<= L2 || L2+L3<=L1){
+        valid=0;
+       }
+
+       else{
+        valid=1;
+       }
+       printf("%d",valid);
+
        break;
    case 9://Rectangle
+       printf("\nEnter First Side:  ");
+       scanf("%u",&L1);
+
+       printf("\nEnter Second Side:  ");
+       scanf("%u",&L2);
+
+       printf("\nEnter Third Side:  ");
+       scanf("%u",&L3);
+
+       printf("\nEnter Fourth Side:  ");
+       scanf("%u",&L4);
+       if ((L1 == L2 && L3 == L4) || (L1 == L3 && L2 == L4) || (L1 == L4 && L2 == L3)){
+        valid=1;
+        }else {
+        valid=0;
+        }
+        printf("%d",valid);
        break;
    case 10://Square
+        printf("\nEnter First Side:  ");
+       scanf("%u",&L1);
+
+       printf("\nEnter Second Side:  ");
+       scanf("%u",&L2);
+
+       printf("\nEnter Third Side:  ");
+       scanf("%u",&L3);
+
+       printf("\nEnter Fourth Side:  ");
+       scanf("%u",&L4);
+       if (L1 == L2 && L3 == L4 && L1 == L3){
+        valid=1;
+        }else {
+        valid=0;
+        }
+        printf("%d",valid);
        break;
 
 

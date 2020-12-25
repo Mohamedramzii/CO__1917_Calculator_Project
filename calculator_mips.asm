@@ -339,21 +339,48 @@ j exit
 #### maher section 
 #square
 square:
-li $v0,4
-la $a0,an8
-syscall
+
 #Enter  numbers
 
-########
 li $v0,4
-la $a0,an8
+la $a0, st1
 syscall
+li $v0,5
+syscall
+addi $s4,$v0,0
+li $v0,5
+syscall
+addi $s5,$v0,0
+li $v0,5
+syscall
+addi $s6,$v0,0
+li $v0,5
+syscall
+addi $s7,$v0,0
+li $v0,4
+syscall
+########
+
 #start to find square
-######## remove this and start Your fuckn work#####
+beq  $s4,$s5,Sq1
+li $t4,0
+j ExitSq
+Sq1:
+beq $s6,$s7,Sq2
+li $t4,0
+j ExitSq
+Sq2:
+beq $s4,$s6,Sq3
+li $t4,0
+j ExitSq
+Sq3:
+li $t4,1
+ExitSq:
+#####
 li $v0,4
 la $a0, ch8
 syscall
-###### END Date 26/12 ######
+
 j exit
 
 #####rectangle
@@ -361,12 +388,51 @@ rectangle:
 
 #Enter numbers
 
-########
+
 li $v0,4
-la $a0,an9
+la $a0, st1
 syscall
-#start to find rectangle
-######## remove this and start Your fuckn work#####
+li $v0,5
+syscall
+addi $s4,$v0,0
+li $v0,5
+syscall
+addi $s5,$v0,0
+li $v0,5
+syscall
+addi $s6,$v0,0
+li $v0,5
+syscall
+addi $s7,$v0,0
+li $v0,4
+syscall
+### rect detection
+beq  $s4,$s5,Rect1
+beq $s4,$s6,Rect2
+beq $s4,$s7,Rect3
+Rect1:
+beq  $s6,$s7,Rect11
+li $t4,0
+j ExitRect
+Rect11:
+li $t4,1
+j ExitRect
+Rect2:
+beq $s5,$s7,Rect22
+li $t4,0
+j ExitRect
+Rect22:
+li $t4,1
+j ExitRect
+Rect3:
+beq $s5,$s6,Rect33
+li $t4,0
+j ExitRect
+Rect33:
+li $t4,1
+ExitRect:
+########
+
 li $v0,4
 la $a0, ch9
 syscall
@@ -376,18 +442,58 @@ j exit
 #####triangle
 triangle:
 #Enter three numbers
+li $v0,4
+la $a0, st1
+syscall
+li $v0,5
+syscall
+addi $s4,$v0,0
+li $v0,5
+syscall
+addi $s5,$v0,0
+li $v0,5
+syscall
+addi $s6,$v0,0
+li $v0,4
+syscall
 
+
+
+####Triangle detection
+
+
+add $t4, $s4,$s5
+add $t5, $s4 ,$s6 
+add $t6,$s5,$s6 
+
+sleu  $t7, $t4,$s6 
+beqz $t7,Tri1
+li $s7,0
+j ExitTri
+Tri1:
+sleu  $t8, $t5,$s5
+beqz $t8,Tri2
+li $s7,0
+j ExitTri
+Tri2:
+sleu $t9, $t6,$s4
+beqz $t9,Tri3
+li $s7, 0
+j ExitTri
+Tri3:
+li $s7,1
+ExitTri: 
 ######
 li $v0,4
 la $a0,an10
 syscall
-#start to find triangle
-######## remove this and start Your fuckn work#####
+
 li $v0,4
 la $a0, ch10
 syscall
-###### END Date 26/12 ######
+
 j exit
+
 
 #Default Will  execute this part
 alll:
