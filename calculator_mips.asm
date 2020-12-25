@@ -11,19 +11,17 @@ ch8: .asciiz "8-Square detection  \n"
 ch9: .asciiz "9-Reactangle detection  \n"
 ch10: .asciiz "10-Triangle detection  \n"
 st1: .asciiz "Enter 2 numbers \n"
-an1: .asciiz "\nAddition is \n"
-an2: .asciiz "\nmin of list is \n"
-an3: .asciiz "\nMultiple is \n"
-an4: .asciiz "\ndivision is \n"
+st2: .asciiz "Enter 4 length for each side \n"
+st3: .asciiz "Enter 3 length for each side\n"
+an1: .asciiz "\nAddition is:\t"
+an2: .asciiz "\nmin of list is:\t"
 degree: .asciiz "\enter the degree \n"
 Opposite:.asciiz "\enter the opposite to the angle ?\n"
 Adjacent:.asciiz "\enter  the adjacent (next to) to the angle ?\n"
-Hypotenuse:.asciiz "\enter  the adjacent (next to) to the angle ?\n"
-an6: .asciiz "\nCos is \n"
-an7: .asciiz "\nTan is \n"
-an8: .asciiz "\n Square detection is \n"
-an9: .asciiz "\n Rectangle detection is   \n"
-an10: .asciiz "\n Triangle detection is \n"
+Hypotenuse:.asciiz "\enter  the Hypotenuse the angle ?\n"
+an8: .asciiz "\n Square detection is:\t"
+an9: .asciiz "\n Rectangle detection is:\t"
+an10: .asciiz "\n Triangle detection is:\t"
 Dividend:     .asciiz "\nPlease Enter the Dividend: "
 Divisor:      .asciiz "\nPlease Enter the Divisor: "
 Result:       .asciiz "\nThe Result is: "
@@ -187,7 +185,7 @@ move $s4, $s6
 j while1
 printresult:
 li $v0,4
-la $a0, ch2
+la $a0, an2
 syscall
 li $v0,1
 add $a0, $zero, $s4
@@ -391,7 +389,7 @@ square:
 #Enter  numbers
 
 li $v0,4
-la $a0, st1
+la $a0, st2
 syscall
 li $v0,5
 syscall
@@ -426,7 +424,7 @@ li $t4,1
 ExitSq:
 #####
 li $v0,4
-la $a0, ch8
+la $a0, an8
 syscall
 add $a0, $t4, $0
 li $v0, 1
@@ -440,7 +438,7 @@ rectangle:
 
 
 li $v0,4
-la $a0, st1
+la $a0, st2
 syscall
 li $v0,5
 syscall
@@ -484,7 +482,7 @@ ExitRect:
 ########
 
 li $v0,4
-la $a0, ch9
+la $a0, an9
 syscall
 add $a0, $t4, $0
 li $v0, 1
@@ -495,7 +493,7 @@ j exit
 triangle:
 #Enter three numbers
 li $v0,4
-la $a0, st1
+la $a0, st3
 syscall
 li $v0,5
 syscall
@@ -538,9 +536,6 @@ li $v0,4
 la $a0,an10
 syscall
 
-li $v0,4
-la $a0, ch10
-syscall
 add $a0, $s7, $0
 li $v0, 1
 syscall
