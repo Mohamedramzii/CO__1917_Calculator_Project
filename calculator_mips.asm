@@ -336,7 +336,7 @@ li $v0, 4   #command for printing a string
             syscall                          # Print result contained in $f12
 j exit
 
-#### maher section 
+
 #square
 square:
 
@@ -380,7 +380,9 @@ ExitSq:
 li $v0,4
 la $a0, ch8
 syscall
-
+add $a0, $t4, $0
+li $v0, 1
+syscall
 j exit
 
 #####rectangle
@@ -436,7 +438,9 @@ ExitRect:
 li $v0,4
 la $a0, ch9
 syscall
-###### END Date 26/12 ######
+add $a0, $t4, $0
+li $v0, 1
+syscall
 j exit
 
 #####triangle
@@ -491,7 +495,9 @@ syscall
 li $v0,4
 la $a0, ch10
 syscall
-
+add $a0, $s7, $0
+li $v0, 1
+syscall
 j exit
 
 
