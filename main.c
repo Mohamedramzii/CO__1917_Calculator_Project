@@ -17,9 +17,9 @@ int main()
   printf("\nOperation 5: Sin");
   printf("\nOperation 6: Cos");
   printf("\nOperation 7: Tan");
-  printf("\nOperation 8: Triangle Detection");
+  printf("\nOperation 8: Square Detection");
   printf("\nOperation 9: Rectangle Detection");
-  printf("\nOperation 10: Square Detection");
+  printf("\nOperation 10: Triangle Detection");
   printf("\n\n\t\t\t\t\tCHOOSE YOUR OPERATION \n");
 
 
@@ -66,8 +66,8 @@ do{
 
    case 3: //Multiplication
        printf("\nEnter 2 Numbers:  ");
-       scanf("%d",&num1);
-       scanf("%d",&num2);
+       scanf("%f",&num1);
+       scanf("%f",&num2);
 
        result=num1 * num2;
        printf("\n result = %f ",result);
